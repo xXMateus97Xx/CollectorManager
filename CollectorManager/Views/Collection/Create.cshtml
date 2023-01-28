@@ -1,0 +1,28 @@
+﻿@model CollectionModel
+@{
+    ViewData["Title"] = "Cadastrar Coleção";
+}
+
+<div class="container mb-5">
+    <h1>Cadastrar Coleção</h1>
+    <form asp-controller="Collection" asp-action="Create" method="post">
+        <div class="row mb-3">
+            <div class="form-group mb-2 w-50">
+                <label asp-for="Name">Nome</label>
+                <input class="form-control" asp-for="Name" placeholder="Nome">
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group mb-2 w-50">
+                <label asp-for="Type">Tipo</label>
+                <select class="form-select" asp-for="Type" asp-items="@ViewBag.Types"></select>
+                <span asp-validation-for="Type"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <a asp-action="Index" asp-controller="Collection" class="btn btn-secondary">Voltar</a>
+            </div>
+        </div>
+    </form>
+</div>

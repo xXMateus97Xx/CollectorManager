@@ -1,0 +1,44 @@
+﻿@model IPagedList<CollectionItemResumeModel>
+
+@{
+    ViewData["Title"] = "Itens da Coleção";
+    CollectionItemPageableSearchModel search = ViewBag.Search;
+    var routeValues = new Dictionary<string, string>();
+    routeValues["collectionId"] = search.CollectionId.ToString();
+}
+
+<div>
+    <partial name="_IndexSearch" model="search" />
+    <div>
+        <table class="table table-primary table-striped">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Autores</td>
+                    <td>Formato</td>
+                    <td>Quantidade</td>
+                    <td>Registrado em</td>
+                    <td>Atualizado em</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="col-md-3">@item.Name</td>
+                        <td class="col-md-3">@string.Join("; ", item.Authors)</td>
+                        <td class="col-md-1">@item.FormatName</td>
+                        <td class="col-md-1">@item.Quantity</td>
+                        <td class="col-md-1">@item.CreatedAt.FormatDate()</td>
+                        <td class="col-md-1">@item.LastUpdateAt.FormatDate()</td>
+                        <td class="col-md-4 text-center">
+                            <partial name="_TableItemActionButtons" model="(item.Id, item.Name, routeValues)" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <partial name="_Pager" model="Model" />
+</div>

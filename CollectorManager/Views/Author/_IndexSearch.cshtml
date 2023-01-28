@@ -1,0 +1,20 @@
+﻿@model AuthorPageableSearchModel
+
+<div class="container mb-5">
+    <form asp-controller="Author" asp-action="Index" method="get">
+        <input type="hidden" asp-for="CollectionId"/>
+        <div class="row mb-3">
+            <div class="form-group mb-2 w-50">
+                <label asp-for="Name">Nome</label>
+                <input class="form-control" asp-for="Name" placeholder="Nome">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+                <a asp-action="Create" asp-controller="Author" asp-route-collectionId="@Model.CollectionId" class="btn btn-secondary">Cadastrar</a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,9 @@
+﻿@model (int Id, string Name, Dictionary<string, string>? RouteValues)
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var routeValues = Model.RouteValues ?? new Dictionary<string, string>();
+    routeValues["id"] = Model.Id.ToString();
+}
+
+<a class="btn btn-sm btn-primary" asp-route-id="@Model.Id" asp-controller="@controller" asp-action="Edit" asp-all-route-data="routeValues">Editar</a>
+<a class="btn btn-sm btn-danger btn-delete" href="#" data-name="@Model.Name" data-route="@Url.Action("Delete", controller, routeValues)">Deletar</a>

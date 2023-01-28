@@ -1,0 +1,21 @@
+﻿@model IPagedList
+
+@{
+    Dictionary<string, object> routeValues = ViewBag.SearchRouteValues ?? new Dictionary<string, object>();
+    var options = new PagedListRenderOptions
+    {
+        FunctionToTransformEachPageLink = (liTag, aTag) => { 
+            aTag.Attributes.Add("class", "page-link"); 
+            return aTag; },
+        LiElementClasses = new[] { "page-item" },
+        UlElementClasses = new[] { "pagination justify-content-center" }
+    };
+}
+
+<div class="justify-content-center">
+    @Html.PagedListPager(Model, page => {
+        routeValues["PageIndex"] = page;
+        return Url.Action("Index", routeValues);
+    },
+    options)
+</div>

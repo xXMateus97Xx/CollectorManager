@@ -1,0 +1,34 @@
+﻿@model IPagedList<AuthorResumeModel>
+
+@{
+    ViewData["Title"] = "Formatos";
+    AuthorPageableSearchModel search = ViewBag.Search;
+    var routeValues = new Dictionary<string, string>();
+    routeValues["collectionId"] = search.CollectionId.ToString();
+}
+
+<div>
+    <partial name="_IndexSearch" model="search" />
+    <div>
+        <table class="table table-primary table-striped">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="col-md-6">@item.Name</td>
+                        <td class="col-md-2">
+                            <partial name="_TableItemActionButtons" model="(item.Id, item.Name, routeValues)" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <partial name="_Pager" model="Model" />
+</div>

@@ -1,0 +1,39 @@
+﻿@model IPagedList<CollectionResumeModel>
+
+@{
+    ViewData["Title"] = "Coleções";
+    CollectionPageableSearchModel search = ViewBag.Search;
+}
+
+<div>
+   <partial name="_IndexSearch" model="search"/>
+    <div>
+        <table class="table table-primary table-striped">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Tipo</td>
+                    <td>Itens na Coleção</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="col-md-5">@item.Name</td>
+                        <td class="col-md-1">@item.Type.GetName()</td>
+                        <td class="col-md-2">@item.Items</td>
+                        <td class="col-md-6">
+                            <a class="btn btn-sm btn-dark" asp-controller="CollectionItem" asp-action="Index" asp-route-collectionId="@item.Id">Items</a>
+                            <a class="btn btn-sm btn-dark" asp-controller="Format" asp-action="Index" asp-route-collectionId="@item.Id">Formatos</a>
+                            <a class="btn btn-sm btn-dark" asp-controller="Author" asp-action="Index" asp-route-collectionId="@item.Id">Autores</a>
+                            <partial name="_TableItemActionButtons" model="(item.Id, item.Name, (Dictionary<string, string>?)null)" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <partial name="_Pager" model="Model"/>
+</div>

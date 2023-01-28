@@ -1,0 +1,29 @@
+﻿@model CollectionItemPageableSearchModel
+
+<div class="container mb-5">
+    <form asp-controller="CollectionItem" asp-action="Index" method="get">
+        <input type="hidden" asp-for="CollectionId"/>
+        <div class="row mb-3">
+            <div class="form-group mb-2 w-50">
+                <label asp-for="Name">Nome</label>
+                <input class="form-control" asp-for="Name" placeholder="Nome">
+            </div>
+            <div class="form-group mb-2 w-50">
+                <label asp-for="Author">Autor</label>
+                <input class="form-control" asp-for="Author" placeholder="Autor">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="form-group mb-2 w-50">
+                <label asp-for="Format">Formato</label>
+                <select class="js-select2" data-live-search="true" asp-for="Format" asp-items="@ViewBag.Formats"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+                <a asp-action="Create" asp-controller="CollectionItem" asp-route-collectionId="@Model.CollectionId" class="btn btn-secondary">Cadastrar</a>
+            </div>
+        </div>
+    </form>
+</div>
